@@ -38,5 +38,5 @@ class LGMLoss(nn.Module):
         logits_with_margin = torch.mul(neg_sqr_dist, K)
         means_batch = torch.index_select(self.means, dim=0, index=labels)
         likelihood_reg_loss = self.lambda_ * (torch.sum((feat - means_batch)**2) / 2) * (1. / batch_size)
-        return neg_sqr_dist, likelihood_reg_loss, self.means
+        return logits_with_margin, likelihood_reg_loss, self.means
 
